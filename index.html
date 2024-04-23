@@ -17,14 +17,12 @@
   />
   <title>Agile Board Task Management</title>
  </head>
-
  <body>
   <!-- Navigation Sidebar: Contains the logo, navigation links for boards, and theme toggle. -->
   <nav class="side-bar" id="side-bar-div">
    <div id="side-logo-div">
     <img id="logo" src="./assets/logo-dark.svg" alt="logo-dark" />
    </div>
-
    <div class="boards-nav-links-div" id="boards-nav-links-div">
     <h4 id="headline-sidepanel">ALL BOARDS</h4>
    </div>
@@ -52,7 +50,6 @@
   <button id="show-side-bar-btn">
    <img src="./assets/icon-show-sidebar.svg" alt="icon-show-sidebar" />
   </button>
-
   <!-- Main Layout: Header with board title, add task button, and main content area for task columns. -->
   <div id="layout">
    <header id="header" class="sticky-header">
@@ -80,7 +77,6 @@
      <button class="editBtns" id="deleteBoardBtn">Delete Board</button>
     </div>
    </header>
-
    <div class="container">
     <main class="card-column-main">
      <!-- Task Columns: Display tasks grouped by status (TODO, DOING, DONE). -->
@@ -113,7 +109,6 @@
     </main>
    </div>
   </div>
-
   <!-- New Task Modal: Form for adding a new task. -->
   <form class="modal-window" id="new-task-modal-window">
    <h4 class="modal-title">Add New Task</h4>
@@ -160,7 +155,6 @@
     </button>
    </div>
   </form>
-
   <!-- Edit Task Modal: Form for editing an existing task's details. -->
   <div class="edit-task-modal-window">
    <form id="edit-task-form">
@@ -201,9 +195,7 @@
     </div>
    </form>
   </div>
-
   <div id="filterDiv"></div>
-
   <!-- JavaScript Import -->
   <script type="module" src="./index.js"></script>
  </body>
