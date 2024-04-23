@@ -238,90 +238,48 @@ function addTask(event) {
 }
 
 function toggleSidebar(show) {
- elements.showSideBarBtn.classList.toggle("show", !show);
- elements.showSideBarBtn.classList.toggle("fixed", !show);
- elements.sideBar.classList.toggle("show", show);
- localStorage.setItem("showSideBar", show);
-
- const sideBarWidth = getElementWidth(elements.sideBar),
-  fixedDiv = elements.sideBar.querySelector("div");
- fixedDiv.style.width = show ? sideBarWidth : 0;
- fixedDiv.classList.toggle("fixed-sidebar", show);
-
- document
-  .getElementsByClassName("side-bar-bottom")[0]
-  .classList.toggle("fixed-bottom", show);
-
- topHeaderSizing(show);
+ const sidebar = document.getElementById("side-bar-div");
+ if (show) {
+  sidebar.style.display = "block"; // Show the sidebar
+  elements.showSideBarBtn.style.display = "none"; //hide the sidebar button
+ } else {
+  sidebar.style.display = "none"; // hide the sidebar
+  elements.showSideBarBtn.style.display = "block"; //show the sidebar button
+ }
 }
-function toggleTheme() {
- document.body.classList.toggle("light-theme");
- const isLightTheme = document.body.classList.contains("light-theme");
 
- localStorage.setItem("light-theme", isLightTheme ? "enabled" : "disabled");
- elements.themeSwitch.checked = isLightTheme;
- elements.logo.src = elements.logo.src
-  .replace(window.location.origin, ".")
-  .replace(isLightTheme ? "dark" : "light", isLightTheme ? "light" : "dark");
+function toggleTheme() {
+ const isLightTheme = elements.themeSwitch.checked;
+ if (isLightTheme) {
+  localStorage.setItem("light-theme", "enabled"); // set to light mode
+ } else {
+  localStorage.setItem("light-theme", "disabled"); // set back to default
+ }
+
+ document.body.classList.toggle("light-theme", isLightTheme); //Toggle the 'light-theme' class
 }
 
 function openEditTaskModal(task) {
  // Set task details in modal inputs
- elements.editTaskTitleInput.value = task.title;
- elements.editTaskDescInput.value = task.description;
- const selectedStatus = elements.editSelectStatus.querySelector(
-  `option[value="${task.status}"]`
- );
- selectedStatus.selected = true;
-
- toggleModal(true, elements.editTaskModal); // Show the edit task modal
 
  // Get button elements from the task modal
- const saveEditBtn = document.getElementById("save-task-changes-btn"),
-  deleteTaskBtn = document.getElementById("delete-task-btn");
 
  // Call saveTaskChanges upon click of Save Changes button
- saveEditBtn.addEventListener("click", async (event) => {
-  event.preventDefault();
-
-  await saveTaskChanges(task.id);
- });
 
  // Delete task using a helper function and close the task modal
- deleteTaskBtn.addEventListener("click", async (event) => {
-  event.preventDefault();
 
-  const taskTitle = document.getElementById("edit-task-title-input").value,
-   isConfimed = await confirm(`Delete ${taskTitle} task?`);
-
-  if (isConfimed) {
-   deleteTask(task.id);
-   toggleModal(false, elements.editTaskModal);
-   refreshTasksUI();
-  }
- });
+ toggleModal(true, elements.editTaskModal); // Show the edit task modal
 }
 
 function saveTaskChanges(taskId) {
  // Get new user inputs
- const editTaskTitleInput = document.getElementById("edit-task-title-input"),
-  editTaskDescInput = document.getElementById("edit-task-desc-input"),
-  editSelectStatus = document.getElementById("edit-select-status");
 
  // Create an object with the updated task details
- const task = {
-  id: taskId,
-  title: editTaskTitleInput.value,
-  description: editTaskDescInput.value,
-  status: editSelectStatus.value,
-  board: activeBoard,
- };
 
- // Update task using a helper function
- putTask(taskId, task);
+ // Update task using a hlper functoin
 
  // Close the modal and refresh the UI to reflect the changes
- toggleModal(false, elements.editTaskModal);
+
  refreshTasksUI();
 }
 
@@ -332,17 +290,10 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function init() {
- initializeData();
- showTasksProgress();
  setupEventListeners();
  const showSidebar = localStorage.getItem("showSideBar") === "true";
  toggleSidebar(showSidebar);
  const isLightTheme = localStorage.getItem("light-theme") === "enabled";
  document.body.classList.toggle("light-theme", isLightTheme);
- elements.themeSwitch.checked = isLightTheme;
- elements.logo.src = elements.logo.src
-  .replace(window.location.origin, ".")
-  .replace(isLightTheme ? "dark" : "light", isLightTheme ? "light" : "dark");
- fetchAndDisplayBoardsAndTasks();
- // refreshTasksUI(); // Initial display of boards and tasks
+ fetchAndDisplayBoardsAndTasks(); // Initial display of boards and tasks
 }
