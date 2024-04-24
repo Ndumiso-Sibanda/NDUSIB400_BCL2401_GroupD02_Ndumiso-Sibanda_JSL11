@@ -24,16 +24,42 @@ function initializeData() {
 initializeData();
 
 // TASK: Get elements from the DOM
+// TASK: Get elements from the DOM
 const elements = {
- headerBoardName: document.getElementById("header-board-name"),
- columnDivs: document.querySelectorAll(".column-div"),
- filterDiv: document.getElementById("filterDiv"),
+ // Navigation Sidebar: Contains the logo, navigation links for boards, and theme toggle.
+ boardsNavLinksDiv: document.getElementById("boards-nav-links-div"),
+ themeSwitch: document.getElementById("switch"),
  hideSideBarBtn: document.getElementById("hide-side-bar-btn"),
  showSideBarBtn: document.getElementById("show-side-bar-btn"),
- themeSwitch: document.getElementById("switch"),
- createNewTaskBtn: document.getElementById("create-task-btn"),
- modalWindow: document.querySelector(".modal-window"),
+ sideBar: document.querySelector(".side-bar"),
+ // editTaskModal: document.getElementById("edit-task-modal-window"),
+ // Main Layout: Header with board title, add task button, and main content area for task columns.
+ headerBoardName: document.getElementById("header-board-name"),
+ dropDownBtn: document.getElementById("dropdownBtn"),
+ createNewTaskBtn: document.getElementById("add-new-task-btn"),
+ deleteBoardBtn: document.getElementById("deleteBoardBtn"),
+ editBoardBtn: document.getElementById("edit-board-btn"),
+ // Task Columns: Display tasks grouped by status (TODO, DOING, DONE).
+ columnDivs: document.querySelectorAll(".column-div"),
+ // New Task Modal: Form for creating a new task.
+ modalWindow: document.getElementById("new-task-modal-window"),
+ titleInput: document.getElementById("title-input"),
+ descriptionInput: document.getElementById("desc-input"),
+ selectStatus: document.getElementById("select-status"),
+ createTaskBtn: document.getElementById("create-task-btn"),
+ cancelAddTaskBtn: document.getElementById("cancel-add-task-btn"),
+ // Edit Task Modal: Form for editing an existing task's details.
  editTaskModal: document.querySelector(".edit-task-modal-window"),
+ editTaskForm: document.getElementById("edit-task-form"),
+ editTaskTitleInput: document.getElementById("edit-task-title-input"),
+ editBtn: document.getElementById("edit-btn"),
+ editTaskDescInput: document.getElementById("edit-task-desc-input"),
+ editSelectStatus: document.getElementById("edit-select-status"),
+ saveTaskChangesBtn: document.getElementById("save-task-changes-btn"),
+ cancelEditBtn: document.getElementById("cancel-edit-btn"),
+ deleteTaskBtn: document.getElementById("delete-task-btn"),
+ // Filter Div
+ filterDiv: document.getElementById("filterDiv"),
 };
 
 let activeBoard = "";
