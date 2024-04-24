@@ -238,21 +238,14 @@ function addTask(event) {
 }
 
 function toggleSidebar(show) {
- elements.showSideBarBtn.classList.toggle("show", !show);
- elements.showSideBarBtn.classList.toggle("fixed", !show);
- elements.sideBar.classList.toggle("show", show);
- localStorage.setItem("showSideBar", show);
-
- const sideBarWidth = getElementWidth(elements.sideBar),
-  fixedDiv = elements.sideBar.querySelector("div");
- fixedDiv.style.width = show ? sideBarWidth : 0;
- fixedDiv.classList.toggle("fixed-sidebar", show);
-
- document
-  .getElementsByClassName("side-bar-bottom")[0]
-  .classList.toggle("fixed-bottom", show);
-
- topHeaderSizing(show);
+ const sidebar = document.getElementById("side-bar-div");
+ if (show) {
+  sidebar.style.display = "block"; // Show the sidebar
+  elements.showSideBarBtn.style.display = "none"; //hide the sidebar button
+ } else {
+  sidebar.style.display = "none"; // hide the sidebar
+  elements.showSideBarBtn.style.display = "block"; //show the sidebar button
+ }
 }
 
 function toggleTheme() {
@@ -267,14 +260,6 @@ function toggleTheme() {
 }
 
 function openEditTaskModal(task) {
- // Set task details in modal inputs
- elements.editTaskTitleInput.value = task.title;
- elements.editTaskDescInput.value = task.description;
- const selectedStatus = elements.editSelectStatus.querySelector(
-  `option[value="${task.status}"]`
- );
- selectedStatus.selected = true;
-
  // Set task details in modal inputs
 
  // Get button elements from the task modal
