@@ -33,3 +33,4 @@ Conclusion
 In conclusion, this project was a great opportunity for me to practice my JavaScript skills and learn new concepts. Although there are still areas for improvement, I am proud of what I have accomplished. This project has given me the confidence to take on more complex challenges in the future. I hope to continue improving this project and adding new features to it.
 
 Thank you for taking the time to review my project. I appreciate any feedback or suggestions you may have.
+here is my loom video link ( https://www.loom.com/share/5b9af7eafada4f8b8922035273e83925?sid=b1f48121-c4bc-4575-8a99-9276feecb29d )
