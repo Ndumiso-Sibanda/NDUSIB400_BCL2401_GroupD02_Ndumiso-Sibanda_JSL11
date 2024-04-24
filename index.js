@@ -249,14 +249,14 @@ function toggleSidebar(show) {
 }
 
 function toggleTheme() {
- const isLightTheme = elements.themeSwitch.checked;
- if (isLightTheme) {
-  localStorage.setItem("light-theme", "enabled"); // set to light mode
- } else {
-  localStorage.setItem("light-theme", "disabled"); // set back to default
- }
+ document.body.classList.toggle("light-theme");
+ const isLightTheme = document.body.classList.contains("light-theme");
 
- document.body.classList.toggle("light-theme", isLightTheme); //Toggle the 'light-theme' class
+ localStorage.setItem("light-theme", isLightTheme ? "enabled" : "disabled");
+ elements.themeSwitch.checked = isLightTheme;
+ elements.logo.src = elements.logo.src
+  .replace(window.location.origin, ".")
+  .replace(isLightTheme ? "dark" : "light", isLightTheme ? "light" : "dark");
 }
 
 function openEditTaskModal(task) {
