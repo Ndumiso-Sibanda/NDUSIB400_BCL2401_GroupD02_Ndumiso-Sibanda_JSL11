@@ -300,7 +300,7 @@ function init() {
   logo.src = "./assets/logo-light.svg";
  }
  setupEventListeners();
- const showSidebar = localStorage.getItem("showSideBar") === "true";
+ const showSidebar = localStorage.getItem("showSideBar") === "false";
  toggleSidebar(showSidebar);
  const isLightTheme = localStorage.getItem("light-theme") === "enabled";
  document.body.classList.toggle("light-theme", isLightTheme);
