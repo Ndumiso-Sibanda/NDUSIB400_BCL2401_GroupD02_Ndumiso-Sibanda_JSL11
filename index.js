@@ -274,28 +274,32 @@ function addTask(event) {
 }
 
 function toggleSidebar(show) {
- const sidebar = document.getElementById("side-bar-div");
  if (show) {
-  sidebar.style.display = "block"; // Show the sidebar
-  elements.showSideBarBtn.style.display = "none"; //hide the sidebar button
+  elements.sideBar.style.display = "block";
+  elements.showSideBarBtn.style.display = "none";
  } else {
-  sidebar.style.display = "none"; // hide the sidebar
-  elements.showSideBarBtn.style.display = "block"; //show the sidebar button
+  elements.sideBar.style.display = "none";
+  elements.showSideBarBtn.style.display = "block";
  }
+
  localStorage.setItem("showSideBar", show);
 }
 
 function toggleTheme() {
- const isLightTheme = elements.themeSwitch.checked;
+ const isLightTheme = document.body.classList.contains("light-theme");
+ document.body.classList.toggle("light-theme");
+ localStorage.setItem("light-theme", !isLightTheme ? "enabled" : "disabled");
+
  if (isLightTheme) {
-  localStorage.setItem("light-theme", "enabled"); // set to light mode
+  localStorage.setItem("logo-theme", "./assets/logo-dark.svg");
+  localStorage.setItem("light-theme", "disabled");
  } else {
-  localStorage.setItem("light-theme", "disabled"); // set back to default
+  localStorage.setItem("logo-theme", "./assets/logo-light.svg");
+  localStorage.setItem("light-theme", "enabled");
  }
 
- document.body.classList.toggle("light-theme", isLightTheme); //Toggle the 'light-theme' class
+ elements.logo.src = localStorage.getItem("logo-theme");
 }
-
 function openEditTaskModal(task) {
  // Get button elements from the task modal
  elements.editTaskTitleInput.value = task.title;
@@ -345,8 +349,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function init() {
- if (localStorage.getItem("logo") === "./assets/logo-light.svg") {
-  logo.src = "./assets/logo-light.svg";
+ if (localStorage.getItem("logo-theme") === "./assets/logo-light.svg") {
+  elements.logo.src = "./assets/logo-light.svg";
  }
  setupEventListeners();
  const showSidebar = localStorage.getItem("showSideBar") === "true";
