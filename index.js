@@ -282,6 +282,7 @@ function toggleSidebar(show) {
   sidebar.style.display = "none"; // hide the sidebar
   elements.showSideBarBtn.style.display = "block"; //show the sidebar button
  }
+ localStorage.setItem("showSideBar", show);
 }
 
 function toggleTheme() {
@@ -348,7 +349,7 @@ function init() {
   logo.src = "./assets/logo-light.svg";
  }
  setupEventListeners();
- const showSidebar = localStorage.getItem("showSideBar") === "false";
+ const showSidebar = localStorage.getItem("showSideBar") === "true";
  toggleSidebar(showSidebar);
  const isLightTheme = localStorage.getItem("light-theme") === "enabled";
  document.body.classList.toggle("light-theme", isLightTheme);
