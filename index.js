@@ -34,6 +34,7 @@ const elements = {
  themeSwitch: document.getElementById("switch"),
  hideSideBarBtn: document.getElementById("hide-side-bar-btn"),
  showSideBarBtn: document.getElementById("show-side-bar-btn"),
+ sideBarBottom: document.querySelector("side-bar-bottom"),
 
  // DOM elements for the Main Layout: Header with board title, add task button
  header: document.getElementById("header"),
@@ -224,6 +225,8 @@ function setupEventListeners() {
   toggleSidebar(true);
  });
 
+ //elements.sideBarBottom.style.paddingTop = "300px";
+
  // Theme switch event listener
  elements.themeSwitch.addEventListener("change", toggleTheme);
 
@@ -317,21 +320,16 @@ function openEditTaskModal(task) {
 
 function saveTaskChanges(taskId) {
  // Create an object with the updated task details
- const titleInput = elements.editTaskTitleInput.value;
- const descriptionInput = elements.editTaskDescInput.value;
- const selectStatus = elements.editSelectStatus.value;
-
- // Create an object with the updated task details
- const updatedTask = {
-  title: titleInput,
-  description: descriptionInput,
-  status: selectStatus,
+ const updatedTaskDetails = {
+  id: taskId,
+  title: elements.editTaskTitleInput.value,
+  description: elements.editTaskDescInput,
+  status: elements.editSelectStatus.value,
   board: activeBoard,
  };
 
  // Update task using a helper functoin
- patchTask(taskId, updatedTask);
- putTask(taskId, updatedTask);
+ putTask(taskId, updatedTaskDetails);
 
  // Close the modal and refresh the UI to reflect the changes
  toggleModal(false, elements.editTaskModal);
