@@ -24,40 +24,47 @@ function initializeData() {
 initializeData();
 
 // TASK: Get elements from the DOM
-// TASK: Get elements from the DOM
+// DOM elements for the Navigation Sidebar
 const elements = {
- // Navigation Sidebar: Contains the logo, navigation links for boards, and theme toggle.
+ headerBoardName: document.getElementById("header-board-name"),
+ sideBar: document.querySelector(".side-bar"),
+ sideLogoDiv: document.getElementById("logo"),
+ sideBarDiv: document.getElementById("side-bar-div"),
  boardsNavLinksDiv: document.getElementById("boards-nav-links-div"),
  themeSwitch: document.getElementById("switch"),
  hideSideBarBtn: document.getElementById("hide-side-bar-btn"),
  showSideBarBtn: document.getElementById("show-side-bar-btn"),
- sideBar: document.querySelector(".side-bar"),
- // editTaskModal: document.getElementById("edit-task-modal-window"),
- // Main Layout: Header with board title, add task button, and main content area for task columns.
+
+ // DOM elements for the Main Layout: Header with board title, add task button
+ header: document.getElementById("header"),
  headerBoardName: document.getElementById("header-board-name"),
- dropDownBtn: document.getElementById("dropdownBtn"),
- createNewTaskBtn: document.getElementById("add-new-task-btn"),
- deleteBoardBtn: document.getElementById("deleteBoardBtn"),
+ dropdownBtn: document.getElementById("dropdownBtn"),
+ addNewTaskBtn: document.getElementById("add-new-task-btn"),
  editBoardBtn: document.getElementById("edit-board-btn"),
- // Task Columns: Display tasks grouped by status (TODO, DOING, DONE).
+ deleteBoardBtn: document.getElementById("deleteBoardBtn"),
+
+ // DOM elements for the Main Layout: main content area for task columns
  columnDivs: document.querySelectorAll(".column-div"),
- // New Task Modal: Form for creating a new task.
+ tasksContainers: document.querySelectorAll(".tasks-container"),
+
+ // DOM elements for New Task Modal: Form for adding a new task
  modalWindow: document.getElementById("new-task-modal-window"),
  titleInput: document.getElementById("title-input"),
- descriptionInput: document.getElementById("desc-input"),
+ descInput: document.getElementById("desc-input"),
  selectStatus: document.getElementById("select-status"),
- createTaskBtn: document.getElementById("create-task-btn"),
+ createNewTaskBtn: document.getElementById("add-new-task-btn"),
  cancelAddTaskBtn: document.getElementById("cancel-add-task-btn"),
- // Edit Task Modal: Form for editing an existing task's details.
+
+ // DOM elements for Edit Task Modal: Form for editing an existing task's details
  editTaskModal: document.querySelector(".edit-task-modal-window"),
  editTaskForm: document.getElementById("edit-task-form"),
  editTaskTitleInput: document.getElementById("edit-task-title-input"),
- editBtn: document.getElementById("edit-btn"),
  editTaskDescInput: document.getElementById("edit-task-desc-input"),
  editSelectStatus: document.getElementById("edit-select-status"),
  saveTaskChangesBtn: document.getElementById("save-task-changes-btn"),
  cancelEditBtn: document.getElementById("cancel-edit-btn"),
  deleteTaskBtn: document.getElementById("delete-task-btn"),
+
  // Filter Div
  filterDiv: document.getElementById("filterDiv"),
 };
@@ -164,7 +171,7 @@ function styleActiveBoard(boardName) {
 
 function addTaskToUI(task) {
  const column = document.querySelector(
-  '.column-div[data-status="${task.status}"]'
+  `.column-div[data-status="${task.status}"]`
  );
  if (!column) {
   console.error(`Column not found for status: ${task.status}`);
@@ -305,16 +312,21 @@ function openEditTaskModal(task) {
   }
  };
  toggleModal(true, elements.editTaskModal); // Show the edit task modal
+ refreshTasksUI();
 }
 
 function saveTaskChanges(taskId) {
  // Create an object with the updated task details
+ const titleInput = elements.editTaskTitleInput.value;
+ const descriptionInput = elements.editTaskDescInput.value;
+ const selectStatus = elements.editSelectStatus.value;
+
+ // Create an object with the updated task details
  const updatedTask = {
+  title: titleInput,
+  description: descriptionInput,
+  status: selectStatus,
   board: activeBoard,
-  description: elements.editTaskDescInput.value,
-  id: JSON.parse(localStorage.getItem("id")),
-  status: elements.editSelectStatus.value,
-  title: elements.editTaskTitleInput.value,
  };
 
  // Update task using a helper functoin
